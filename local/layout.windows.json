@@ -82,12 +82,38 @@
         "assets",
         "scene"
       ]
+    },
+    "window-1534087891293": {
+      "main": false,
+      "url": "unpack://static/window.html",
+      "windowType": "dockable",
+      "x": 1045,
+      "y": 303,
+      "width": 300,
+      "height": 502,
+      "layout": {
+        "children": [
+          {
+            "active": 0,
+            "children": [
+              "node-library"
+            ],
+            "height": 480,
+            "type": "panel",
+            "width": 300
+          }
+        ],
+        "type": "dock-v"
+      },
+      "panels": [
+        "node-library"
+      ]
     }
   },
   "panels": {
     "node-library": {
-      "x": 1287,
-      "y": 480,
+      "x": 1045,
+      "y": 303,
       "width": 300,
       "height": 502
     },

@@ -29,15 +29,18 @@ cc.Class({
         // },
         canvas: cc.Node,
         followSpeed: 200,
+        answerDisplay: {
+            default: null,
+            type: cc.Label
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function () {
+        this.answerDisplay.string = this.id
         this.startPosition = this.node.getPosition();
-        console.log("this.startPosition " + this.startPosition);
-        console.log('this.node.getBoundingBox() ' + this.node.getBoundingBox());
-        console.log('this.node.getBoundingBoxToWorld() ' + this.node.getBoundingBoxToWorld());
+
         var self = this;
         self.moveToPos = cc.v2(0, 0);
         self.isDragged = false;
@@ -60,9 +63,11 @@ cc.Class({
             }
         }, self.node);
         self.canvas.on(cc.Node.EventType.TOUCH_END, function (event) {
-            self.isDragged = false; // when touch ended, stop moving
-            var returnToStart = cc.moveTo(0.3, self.startPosition);
-            self.node.runAction(returnToStart);
+            if (self.isDragged) {
+                self.isDragged = false; // when touch ended, stop moving
+                var returnToStart = cc.moveTo(0.3, self.startPosition);
+                self.node.runAction(returnToStart);
+            }
         }, self.node);
     },
 

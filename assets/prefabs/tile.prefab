@@ -15,19 +15,23 @@
     "_name": "tile",
     "_objFlags": 0,
     "_parent": null,
-    "_children": [],
-    "_active": true,
-    "_level": 3,
-    "_components": [
+    "_children": [
       {
         "__id__": 2
+      }
+    ],
+    "_active": true,
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 5
       },
       {
-        "__id__": 3
+        "__id__": 6
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 7
     },
     "_opacity": 255,
     "_color": {
@@ -49,7 +53,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -127,
+      "x": 0,
       "y": 0,
       "z": 0
     },
@@ -70,9 +74,108 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 192,
+    "_localZOrder": 87,
     "groupIndex": 0,
     "_id": ""
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "answer",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 4,
+    "_components": [
+      {
+        "__id__": 3
+      }
+    ],
+    "_prefab": {
+      "__id__": 4
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 44.49,
+      "height": 40
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0.1,
+      "y": 0.3,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 59,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_srcBlendFactor": 1,
+    "_dstBlendFactor": 771,
+    "_useOriginalSize": false,
+    "_string": "42",
+    "_N$string": "42",
+    "_fontSize": 40,
+    "_lineHeight": 40,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_id": "98qquNtkJCWYoCRhVGaWrB"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "63a930b9-c097-4c1f-912a-f656a72c3a4d"
+    },
+    "fileId": "70nj3NyCZNuLN15SIO9m3N",
+    "sync": false
   },
   {
     "__type__": "cc.Sprite",
@@ -100,7 +203,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "c4DDpGv5tHdKzGFrukZHYK"
+    "_id": "baShBHdaBIVY+npqypWXJf"
   },
   {
     "__type__": "d7c83ED3V1NFLu1a0Q3OM3s",
@@ -111,7 +214,11 @@
     },
     "_enabled": true,
     "canvas": null,
-    "_id": "03MILyWmVKlplZoJoh6vUn"
+    "followSpeed": 200,
+    "answerDisplay": {
+      "__id__": 3
+    },
+    "_id": "8c8MjMaONEHI3m7axy+zK+"
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -3,6 +3,7 @@ cc.Class({
 
     properties: {
         refToSpawnManager: require('SpawnManager'),
+        refToTileManager: require('TileManager'),
         bombPrefab: {
             default: null,
             type: cc.Prefab
@@ -25,6 +26,8 @@ cc.Class({
 
     onLoad: function () {
         this.refToSpawnManager.game = this;
+        this.refToTileManager.game = this;
+
         this.currentBombs = 0;
         this.schedule(this.runGame, 2);
 
