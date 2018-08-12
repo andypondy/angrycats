@@ -42,17 +42,17 @@ cc.Class({
 
     onLoad: function () {
         // initialize drop action
-        this.drop = this.drop();
         this.equationDisplay.string = this.equation.id;
     },
 
     start () {
-        this.node.runAction(this.drop);
+
     },
 
     drop: function () {
-        var drop = cc.moveTo(this.dropSpeed, cc.v2(this.targetX, this.targetY)).easing(cc.easeCubicActionInOut());
-        return drop;
+        console.log('anand - drop it like its hot ');
+        var dropAction = cc.moveTo(this.dropSpeed, cc.v2(this.targetX, this.targetY)).easing(cc.easeCubicActionInOut());
+        this.node.runAction(dropAction);
     },
 
     update (dt) {
@@ -60,11 +60,11 @@ cc.Class({
         if (this.node.position.y < (this.targetY+1)) {
             // console.log("bomb equation " + this.equation);
             // do damage
-            this.game.bombMissed();
+            this.spawnmanager.game.bombMissed();
             // show animation
 
-            // destroy
-            this.node.destroy();
+            // return to pool
+            this.spawnmanager.returnBomb(this.node);
         }
     },
 });

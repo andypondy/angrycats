@@ -25,9 +25,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function () {
-        this.refToSpawnManager.game = this;
-        this.refToTileManager.game = this;
-
         this.currentBombs = 0;
         this.schedule(this.runGame, 2);
 
@@ -38,6 +35,10 @@ cc.Class({
         for (var i=0; i < 5; i++) {
             this.createMathEquation(this.difficulty);
         }
+        // this.debugEquations(this.equations);
+
+        this.refToSpawnManager.game = this;
+        this.refToTileManager.game = this;
     },
 
     runGame: function () {
@@ -78,7 +79,7 @@ cc.Class({
     },
 
     getNextEquations: function (howmany) {
-        returnEquations = [];
+        var returnEquations = [];
         for(var i=0; i < howmany; i++) {
             if (this.equations[this.currentEquation + i].status == "incomplete") {
                 returnEquations.push(this.equations[this.currentEquation + i]);
@@ -89,10 +90,17 @@ cc.Class({
                 returnEquations.push(this.createMathEquation(this.difficulty));
             }
         }
+        return returnEquations;
     },
 
     start () {
     },
 
     // update (dt) {},
+
+    debugEquations: function(equations) {
+        for(var i=0; i < equations.length; i++) {
+            console.log('anand - eq:  ' + equations[i].x + "+" + equations[i].y + "=" + equations[i].answer + ", status=" + equations[i].status);
+        }
+    },
 });

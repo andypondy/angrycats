@@ -27,30 +27,65 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        this.tilePositions = []
+        this.tilePositions.push(-this.tileWidth-((this.layout.width)/3) -8);
+        this.tilePositions.push(-this.tileWidth-(this.layout.width/3)/2 + 8);
+        this.tilePositions.push(0);
+        this.tilePositions.push((this.layout.width/2)/3+this.tileWidth - 8);
+        this.tilePositions.push(this.layout.width/3+this.tileWidth + 8);
 
-    start () {
-        var tilePositions = [];
-        tilePositions.push(-this.tileWidth-((this.layout.width)/3));
-        tilePositions.push(-this.tileWidth-(this.layout.width/3)/2);
-        tilePositions.push(0);
-        tilePositions.push(this.layout.width/3+this.tileWidth);
-        tilePositions.push((this.layout.width/2)/3+this.tileWidth);
-
+        this.equations = this.shuffle(this.game.getNextEquations(5));
         var offset = 0;
+        this.tiles = [];
         for(var i=0; i < this.maxTiles; i++) {
             var newTile = cc.instantiate(this.tilePrefab);
-            console.log(i + '-tilePositions[i] ' + (tilePositions[i]) );
-            var startPosition = cc.v2(tilePositions[i], this.layout.y);
+            var startPosition = cc.v2(this.tilePositions[i], this.layout.y);
 
             newTile.getComponent('tile').id = i;
+            newTile.getComponent('tile').equation = this.equations[i];
             newTile.getComponent('tile').canvas = this.canvas;
             newTile.getComponent('tile').game = this.game;
 
             newTile.setPosition(startPosition);
             this.node.addChild(newTile);
+            this.tiles.push(newTile);
         }
+        
+    },
 
+    start () {
+        
+    },
+
+    shuffle: function (equations) {
+        var total = equations.length;
+
+        var order = [];
+        for (var i=0; i < total; i++) {
+            order[i] = -1;
+        }
+        for (var toset=0; toset < total; toset++) {
+            var x = Math.floor(Math.random() * 5);
+            for (var tocheck=0; tocheck < total; tocheck++) {
+                var isfree = true;
+                if (order[tocheck] == x) {
+                    isfree = false;
+                    break;
+                }
+            }
+            if (isfree) {
+                order[toset] = x;
+            }
+            else {
+                toset--;
+            }
+        }
+        var returnEquations = [];
+        for (var toset=0; toset < total; toset++) {
+            returnEquations[toset] = equations[order[toset]];
+        }
+        return returnEquations;
     },
 
     // update (dt) {},

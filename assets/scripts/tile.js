@@ -38,7 +38,8 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function () {
-        this.answerDisplay.string = this.id
+        this.answerDisplay.string = this.equation.answer;
+        // this.answerDisplay.string = this.id;
         this.startPosition = this.node.getPosition();
 
         var self = this;
