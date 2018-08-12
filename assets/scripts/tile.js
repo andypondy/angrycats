@@ -1,34 +1,9 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
         canvas: cc.Node,
-        followSpeed: 200,
+        followSpeed: 2500,
         answerDisplay: {
             default: null,
             type: cc.Label
@@ -38,7 +13,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function () {
-        this.answerDisplay.string = this.equation.answer;
         // this.answerDisplay.string = this.id;
         this.startPosition = this.node.getPosition();
 
@@ -72,6 +46,15 @@ cc.Class({
         }, self.node);
     },
 
+    reset: function () {
+        this.node.setPosition(this.startPosition);
+    },
+
+    setEq: function (equation) {
+        this.equation = equation;
+        this.answerDisplay.string = this.equation.answer;
+    },
+    
     start () {
 
     },
@@ -87,7 +70,7 @@ cc.Class({
         // get move direction
         var direction = this.moveToPos.sub(oldPos).normalize();
         // multiply direction with distance to get new position
-        var newPos = oldPos.add(direction.mul(2500 * dt));
+        var newPos = oldPos.add(direction.mul(this.followSpeed * dt));
         // console.log("oldPos " + oldPos + ", newPos" + newPos + ", this.moveToPos " + this.moveToPos);
         if (newPos == oldPos) {
             console.log('positions are equal ');

@@ -20,6 +20,7 @@ cc.Class({
         catHealth: 100,
         maxBombs: 4,
         bombRadius: 50,
+        _maxEquations:4,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -32,10 +33,10 @@ cc.Class({
         this.equations = [];
 
         // generate 5 equations to begin with
-        for (var i=0; i < 5; i++) {
+        for (var i=0; i < this._maxEquations; i++) {
             this.createMathEquation(this.difficulty);
         }
-        // this.debugEquations(this.equations);
+        // this.debugEq(this.equations);
 
         this.refToSpawnManager.game = this;
         this.refToTileManager.game = this;
@@ -48,8 +49,22 @@ cc.Class({
             this.currentBombs++;
         }
     },
-    bombMissed: function () {
+    bombMissed: function (equation) {
+        // do some damage to Player
+
+        // mark equation as missed
+        this.equations[equation.id].status = "missed";
+        this.refToTileManager.setupAnswers();
+        
+        this.bombDestroyed();
+    },
+
+    bombDefused: function (equation) {
         // do some damage to Boss
+
+        // mark equation as solved
+        this.equations[equation.id].status = "solved";
+        this.refToTileManager.setupAnswers();
 
         this.bombDestroyed();
     },
@@ -68,9 +83,10 @@ cc.Class({
         var answer = x + y;
 
         //generate unique id
-        var id = "" + x + " + " + y;
-        this.equations.push({x:x, y:y, answer:answer, id:id, status:"incomplete"});
-        return this.equations[this.equations.length -1];
+        var eq = "" + x + " + " + y;
+        var equation = {x:x, y:y, answer:answer, eq: eq, id:this.equations.length, status:"incomplete"};
+        this.equations.push(equation);
+        return equation;
     },
 
     getNextEquation: function () {
@@ -80,9 +96,12 @@ cc.Class({
 
     getNextEquations: function (howmany) {
         var returnEquations = [];
-        for(var i=0; i < howmany; i++) {
-            if (this.equations[this.currentEquation + i].status == "incomplete") {
-                returnEquations.push(this.equations[this.currentEquation + i]);
+        for(var i=0; i < this.equations.length; i++) {
+            if (this.equations[i].status == "incomplete") {
+                returnEquations.push(this.equations[i]);
+            }
+            if (returnEquations.length == howmany) {
+                break;
             }
         }
         if (returnEquations.length < howmany) {
@@ -90,6 +109,7 @@ cc.Class({
                 returnEquations.push(this.createMathEquation(this.difficulty));
             }
         }
+        this.debugEq(returnEquations);
         return returnEquations;
     },
 
@@ -98,9 +118,20 @@ cc.Class({
 
     // update (dt) {},
 
-    debugEquations: function(equations) {
+    debugEq: function(equations) {
         for(var i=0; i < equations.length; i++) {
             console.log('anand - eq:  ' + equations[i].x + "+" + equations[i].y + "=" + equations[i].answer + ", status=" + equations[i].status);
         }
     },
+
+    onEnable: function () {
+        cc.director.getCollisionManager().enabled = true;
+        cc.director.getCollisionManager().enabledDebugDraw = true;
+    },
+
+    onDisable: function () {
+        cc.director.getCollisionManager().enabled = false;
+        cc.director.getCollisionManager().enabledDebugDraw = false;
+    },
+
 });

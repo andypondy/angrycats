@@ -22,17 +22,11 @@ cc.Class({
     /**
      * Spawn Manager
      */
-
-    getNextBomb: function() {
-        if (this.lastBombUsed == this.bombFactory.length) { this.lastBombUsed = 0; }
-        return this.bombFactory[this.lastBombUsed++];
-    },
-
     spawnNewBomb: function() {
         // generate a new node in the scene with a preset template
         var newBomb = this._pool.get();
         if (!newBomb) {
-            console.log('anand - instantiate new bomb #' + this._count);
+            // console.log('anand - instantiate new bomb #' + this._count);
             newBomb = cc.instantiate(this.game.bombPrefab);
 
             // A reference to the game object is temporarily stored on the bomb component
@@ -40,9 +34,6 @@ cc.Class({
             newBomb.addComponent('BombPoolHandler');
 
             this._count++;
-        }
-        else {
-            console.log('anand - get a bomb from the pool ');
         }
         
         var startPosition = this.getNewStartPosition();
@@ -52,7 +43,7 @@ cc.Class({
         newBomb.getComponent('bomb').targetX = startPosition.x;
 
         // set math equation
-        newBomb.getComponent('bomb').equation = this.game.getNextEquation();
+        newBomb.getComponent('bomb').setEq(this.game.getNextEquation());
 
         // put the newly added node under the Canvas node
         this.node.addChild(newBomb);
@@ -74,7 +65,7 @@ cc.Class({
     },
 
     returnBomb: function (bomb) {
-        console.log('anand - return bomb ');
+        // console.log('anand - return bomb ');
         this._pool.put(bomb);
     }
     // update (dt) {},
