@@ -20,7 +20,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.tilePositions = [];
         var zero = this.layout.x - this.layout.width/2 + 10;
         var padding = ((this.layout.width/this._maxTiles) - this.tileWidth)/2;
         var onefourth = (this.layout.width/this._maxTiles);

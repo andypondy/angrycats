@@ -21,7 +21,7 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad: function () {
+    onLoad () {
     },
 
     start () {
@@ -37,7 +37,7 @@ cc.Class({
     },
 
     drop: function () {
-        var dropAction = cc.moveTo(this.dropSpeed, cc.v2(this.targetX, this.targetY)).easing(cc.easeCubicActionInOut());
+        var dropAction = cc.moveTo(this.dropSpeed, cc.v2(this.targetX, this.targetY));//.easing(cc.easeCubicActionInOut());
         this.node.runAction(dropAction);
     },
 

@@ -12,7 +12,7 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad: function () {
+    onLoad () {
         // this.answerDisplay.string = this.id;
         this.startPosition = this.node.getPosition();
 
@@ -47,6 +47,7 @@ cc.Class({
     },
 
     reset: function () {
+        this.isDragged = false;
         this.node.setPosition(this.startPosition);
     },
 

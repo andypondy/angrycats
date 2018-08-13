@@ -1,3 +1,5 @@
+var Helpers = require('Helpers');
+
 cc.Class({
     extends: cc.Component,
 
@@ -13,6 +15,18 @@ cc.Class({
 
         this._pool = new cc.NodePool('BombPoolHandler');
         this._count = 0;
+
+        this.spawnPositions = [];
+        this.lastSpawnIndex = 0;
+
+        var maxSpawnPositions = 4;
+        var zero = this.game.background.x - this.game.background.width/2 + 24;
+        var padding = ((this.game.background.width/maxSpawnPositions) - this.game.bombRadius)/2;
+        var onefourth = (this.game.background.width/maxSpawnPositions);
+
+        for(var i=0; i < maxSpawnPositions; i++) {
+            this.spawnPositions.push(zero + padding + onefourth*i);
+        }
     },
 
     start () {
@@ -58,8 +72,16 @@ cc.Class({
         // According to the position of the ground level and the main character's jump height, randomly obtain an anchor point of the bomb on the y axis
         var randY = this.backgroundY;
         // according to the width of the screen, randomly obtain an anchor point of bomb on the x axis
-        randX = (Math.random() - 0.5) * (this.game.ground.width - this.game.bombRadius);
-        // console.log("randX " + randX);
+        // randX = (Math.random() - 0.5) * (this.game.ground.width - this.game.bombRadius);
+        var newIndex = false;
+        while(!newIndex) {
+            var x = Helpers.getRandomInt(0, this.spawnPositions.length);
+            if (x != this.lastSpawnIndex) {
+                this.lastSpawnIndex = x;
+                newIndex = true;
+            }
+        }
+        randX = this.spawnPositions[this.lastSpawnIndex];
         // return to the anchor point of the bomb
         return cc.v2(randX, randY);
     },

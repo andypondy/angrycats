@@ -16,8 +16,13 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        enemyHealth: {
+            default: null,
+            type: cc.Node
+        },
         level: 1,
-        catHealth: 100,
+        catHP: 100,
+        catDamage: 20,
         maxBombs: 4,
         bombRadius: 50,
         _maxEquations:4,
@@ -25,7 +30,7 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad: function () {
+    onLoad () {
         this.currentBombs = 0;
         this.schedule(this.runGame, 2);
 
@@ -40,6 +45,8 @@ cc.Class({
 
         this.refToSpawnManager.game = this;
         this.refToTileManager.game = this;
+
+        this.enemyHealthComponent = this.enemyHealth.getComponent('Health');
     },
 
     runGame: function () {
@@ -61,6 +68,7 @@ cc.Class({
 
     bombDefused: function (equation) {
         // do some damage to Boss
+        this.enemyHealthComponent.takeDamage(this.catDamage);
 
         // mark equation as solved
         this.equations[equation.id].status = "solved";
@@ -109,7 +117,7 @@ cc.Class({
                 returnEquations.push(this.createMathEquation(this.difficulty));
             }
         }
-        this.debugEq(returnEquations);
+        // this.debugEq(returnEquations);
         return returnEquations;
     },
 
@@ -126,12 +134,12 @@ cc.Class({
 
     onEnable: function () {
         cc.director.getCollisionManager().enabled = true;
-        cc.director.getCollisionManager().enabledDebugDraw = true;
+        // cc.director.getCollisionManager().enabledDebugDraw = true;
     },
 
     onDisable: function () {
         cc.director.getCollisionManager().enabled = false;
-        cc.director.getCollisionManager().enabledDebugDraw = false;
+        // cc.director.getCollisionManager().enabledDebugDraw = false;
     },
 
 });
