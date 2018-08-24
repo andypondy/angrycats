@@ -1,3 +1,5 @@
+import {PlatformInstance} from "./PlatformStuff/Platform"
+
 cc.Class({
     extends: cc.Component,
 
@@ -19,6 +21,10 @@ cc.Class({
         enemyHealth: {
             default: null,
             type: cc.Node
+        },
+        playerName: {
+            default: null,
+            type: cc.Node,
         },
         level: 1,
         catHP: 100,
@@ -122,6 +128,8 @@ cc.Class({
     },
 
     start () {
+        PlatformInstance.init();
+        this.playerName.getComponent(cc.Label).string = PlatformInstance.getPlayerName();
     },
 
     // update (dt) {},

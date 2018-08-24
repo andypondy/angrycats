@@ -5,10 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/bomb.js"
+            "name": "Cocos-Debug",
+            "type": "cocos",
+            "request": "attach",
+            "port": 7456,
+            "address": "localhost",
+            "cwd": "${workspaceRoot}"
         }
     ]
 }
