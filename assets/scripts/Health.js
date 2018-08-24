@@ -23,13 +23,13 @@ cc.Class({
     takeDamage: function (damageValue) {
         this.currentHealth -= damageValue;
         if (this.currentHealth < 0) this.currentHealth = 0;
-        console.log('anand -  [', damageValue, this.currentHealth, this.maxHealth, this.initialWidth );
+        // console.log('anand -  [', damageValue, this.currentHealth, this.maxHealth, this.initialWidth );
         this.healthbar.width = (this.currentHealth/this.maxHealth) * this.initialWidth;
     },
 
     reset: function () {
         this.currentHealth = this.maxHealth;
-        console.log('anand -  [', this.currentHealth, this.maxHealth, this.initialWidth );
+        // console.log('anand -  [', this.currentHealth, this.maxHealth, this.initialWidth );
         this.healthbar.width = this.initialWidth;
     },
 

@@ -1,4 +1,11 @@
-const FACEBOOK_ENABLED = false;
+import {FacebookInstance} from "./Facebook"
+import {WechatInstance} from "./Wechat"
+
+// const FACEBOOK_ENABLED = FACEBOOK_ENABLED || false;
+
+var GamePaused = false;
+var SkipFirstInterstitial = true;
+var LevelToStartAfterLoad = -1;
 
 var Platform = cc.Class({
 
@@ -14,33 +21,24 @@ var Platform = cc.Class({
     },
 
     init: function() {
+        FacebookInstance.Hi();
+        WechatInstance.Hi();
         if (FACEBOOK_ENABLED) {
-            var contextId = FBInstant.context.getID();
-            var contextType = FBInstant.context.getType();
-            cc.log("context ID: "+contextId+"  type: "+contextType);
-
-            this.PlayerName = FBInstant.player.getName();
-            cc.sys.localStorage.setItem("localName", PlayerName);
-
-            this.PlayerID = FBInstant.player.getID();
-            this.PlayerPicUrl = FBInstant.player.getPhoto();
-            this.Platform = FBInstant.getPlatform();
+            console.log('anand[Platform.js:23] - facebook is enabled ', );
+            FacebookInstance.init(this);
         }
         else {
-            this.PlayerID = FakeStuff.PlayerID;
-            this.PlayerName = FakeStuff.PlayerName;
-            this.PlayerPicUrl = FakeStuff.PlayerPicUrl;
-            this.Platform = FakeStuff.Platform;
+            console.log('anand[Platform.js:27] - running in local mode ', );
+            FakeStuff.init(this);
         }
-        console.log('anand - this.PlayerName ' + this.PlayerName);
-
+        console.log('anand[Platform.js:36] - this.PlayerName ', this.PlayerName);
+        cc.sys.localStorage.setItem("localName", this.PlayerName);
     },
 
     getPlayerName: function () {
         return this.PlayerName;
-    },
+    }, 
 });
-
 
 var FakeStuff = FakeStuff || {};
 
@@ -48,6 +46,13 @@ FakeStuff.PlayerPicUrl = "someurl";
 FakeStuff.PlayerName = "Anand Offline";
 FakeStuff.PlayerID = "123456789";
 FakeStuff.Platform = "OFFLINE";
+
+FakeStuff.init = function(platform) {
+    platform.PlayerID = FakeStuff.PlayerID;
+    platform.PlayerName = FakeStuff.PlayerName;
+    platform.PlayerPicUrl = FakeStuff.PlayerPicUrl;
+    platform.Platform = FakeStuff.Platform;
+}
 
 
 export var PlatformInstance = PlatformInstance || new Platform();

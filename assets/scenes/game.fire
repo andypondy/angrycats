@@ -1111,7 +1111,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 422.44,
+      "width": 513.59,
       "height": 40
     },
     "_anchorPoint": {
@@ -1157,8 +1157,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "this should be my name",
-    "_N$string": "this should be my name",
+    "_string": "this should be my name XXX",
+    "_N$string": "this should be my name XXX",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
