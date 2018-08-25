@@ -11,5 +11,9 @@
         "local",
         "settings",
         "temp"
+    ],
+    "include": 
+    [
+        "assets/scripts/*"
     ]
 }
