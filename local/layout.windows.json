@@ -7,8 +7,8 @@
       "windowType": "dockable",
       "x": 0,
       "y": 23,
-      "width": 1440,
-      "height": 807,
+      "width": 1920,
+      "height": 1107,
       "layout": {
         "children": [
           {
@@ -18,23 +18,23 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 341,
+                "height": 484,
                 "type": "panel",
-                "width": 230
+                "width": 307
               },
               {
                 "active": 0,
                 "children": [
                   "assets"
                 ],
-                "height": 372,
+                "height": 529,
                 "type": "panel",
-                "width": 230
+                "width": 307
               }
             ],
-            "height": 716,
+            "height": 1016,
             "type": "dock-v",
-            "width": 230
+            "width": 307
           },
           {
             "children": [
@@ -43,9 +43,9 @@
                 "children": [
                   "scene"
                 ],
-                "height": 446.984375,
+                "height": 635,
                 "type": "panel",
-                "width": 856
+                "width": 1144
               },
               {
                 "active": 0,
@@ -53,23 +53,23 @@
                   "console",
                   "timeline"
                 ],
-                "height": 266,
+                "height": 378,
                 "type": "panel",
-                "width": 856
+                "width": 1144
               }
             ],
-            "height": 716,
+            "height": 1016,
             "type": "dock-v",
-            "width": 856
+            "width": 1144
           },
           {
             "active": 0,
             "children": [
               "inspector"
             ],
-            "height": 716,
+            "height": 1016,
             "type": "panel",
-            "width": 342
+            "width": 457
           }
         ],
         "type": "dock-h"
@@ -88,7 +88,7 @@
       "url": "unpack://static/window.html",
       "windowType": "dockable",
       "x": 1045,
-      "y": 303,
+      "y": 603,
       "width": 300,
       "height": 502,
       "layout": {
@@ -108,18 +108,19 @@
       "panels": [
         "node-library"
       ]
-    }
+    },
+    "window-1535126198439": {}
   },
   "panels": {
     "node-library": {
       "x": 1045,
-      "y": 303,
+      "y": 603,
       "width": 300,
       "height": 502
     },
     "preferences": {
-      "x": 440,
-      "y": 177,
+      "x": 1221,
+      "y": 491,
       "width": 584,
       "height": 548
     },
@@ -128,6 +129,12 @@
       "y": 142,
       "width": 584,
       "height": 548
+    },
+    "builder": {
+      "x": 1068,
+      "y": 345,
+      "width": 500,
+      "height": 722
     }
   }
 }
