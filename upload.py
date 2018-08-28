@@ -3,6 +3,13 @@ import os
 import sys
 import subprocess
 
+debug=True
+
+cocosPath = "/Applications/CocosCreator.app/Contents/MacOS/CocosCreator"
+if os.name == 'nt':
+   cocosPath = os.getenv('cocosPath')
+
+
 with open('config.json') as f:
     data = json.load(f)
 
@@ -14,10 +21,11 @@ buildpath   = "build/fb-instant-games"
 if not os.path.exists(path + buildpath):
     os.makedirs(path + buildpath)
 
-compile = "/Applications/CocosCreator.app/Contents/MacOS/CocosCreator --path " + path + " --build  'autoCompile=true;platform=fb-instant-games;debug=true'"
+compile = cocosPath + " --path " + path + " --build  'autoCompile=true;platform=fb-instant-games;debug=true'"
 print compile
-compileprocess = subprocess.Popen(compile.split())
-compileprocess.wait()
+if not debug:
+    compileprocess = subprocess.Popen(compile.split())
+    compileprocess.wait()
 
 archiveToUpload = ""
 for file in os.listdir(buildpath):
@@ -37,6 +45,8 @@ if archiveToUpload != "":
 		  "asset=@" + archiveToUpload,
 		  "-F",
 		  "comment=Graph API upload"]
-    uploadprocess = subprocess.Popen(uploadarr)
-    uploadprocess.wait()
+    print uploadarr
+    if not debug:
+        uploadprocess = subprocess.Popen(uploadarr)
+        uploadprocess.wait()
 
